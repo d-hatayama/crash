@@ -2296,7 +2296,10 @@ readmem(ulonglong addr, int memtype, void *buffer, long size,
 					if (cnt > size)
 						cnt = size;
 
-					cnt = try_zram_decompress(paddr, (unsigned char *)bufptr, cnt, addr);
+					cnt = readswap(addr,
+						       bufptr,
+						       cnt,
+						       addr);
 					if (cnt) {
 						bufptr += cnt;
 						addr += cnt;
